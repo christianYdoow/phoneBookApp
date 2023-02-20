@@ -1,0 +1,33 @@
+<div  class="container">
+    <div class="row">
+        <div class="col-md-6 mb-4" *ngFor="let contact of contacts">
+            <div class="card">
+                <div class="card-body shadow-lg ">
+                    <div class="row align-items-center">
+                        <div class="col-sm-4 ">
+                            <img [src]="contact.image" class="contact-img" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name : <span class="fw-bold">{{contact.name}}</span></li>
+                                <li class="list-group-item">Mobile : <span class="fw-bold">{{contact.number}}</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-1 p-1">
+                            <a routerLink="/contacts/view/{{contact.id}}"class="btn btn-warning my-1">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a routerLink="/contacts/edit/{{contact.id}}" class="btn btn-primary  my-1">
+                                <i class="fa fa-pen"></i>
+                            </a>
+                            <button class="btn btn-danger  my-1" (click)="deleteContact(contact.id)" >
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
