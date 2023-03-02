@@ -1,7 +1,8 @@
-import { Component,Output,EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { CONTACTS } from 'src/app/mock-data/sampleContact';
 import { IContact } from 'src/app/models/IContact';
 import { Location } from '@angular/common';
+import { ContactService } from 'src/app/services/contact.service';
 @Component({
   selector: 'app-add-contact',
   templateUrl: './add-contact.component.html',
@@ -12,52 +13,34 @@ import { Location } from '@angular/common';
 
 export class AddContactComponent {
 
-  contacts=CONTACTS;
 
+  newContact: IContact = {
+    id: undefined,
+    name: '',
+    email: '',
+    image: '',
+    number: '',
+    address: ''
+  };
 
-  newContactId?:number ;
-  newContactName='';
-  newContactImage='';
-  newContactEmail='';
-  newContactNumber='';
-  newContactAddress='';
+  constructor(private contactService: ContactService, private location: Location){
+  }
 
-  constructor(private location :Location){
-    this.newContactId=this.contacts.length+1;
+  addNewContact(): void {
+    this.contactService.addContact(this.newContact).subscribe(() => {
+      this.location.back();
+    });
   }
 
 
-
-  addNewContact() {
-    const newContact = {
-      id: this.newContactId,
-      name: this.newContactName,
-      email: this.newContactEmail,
-      image: this.newContactImage,
-      number: this.newContactNumber,
-      address: this.newContactAddress
+  updateImage(): void {
+    const img = new Image();
+    img.onload = () => {
+      this.newContact.image = img.src;
     };
-    this.contacts.push(newContact);  
-    this.newContactName = '';
-    this.newContactEmail = '';
-    this.newContactImage = '';
-    this.newContactNumber = '';
-    this.newContactAddress = '';
-    this.newContactId!++;
-
-    this.location.back();
-  }
-  
-  
-
-  updateImage(){
-    const img=new Image();
-    img.onload=()=>{
-      this.newContactImage=img.src;
+    img.onerror = () => {
+      this.newContact.image = 'https://via.placeholder.com/150';
     };
-    img.onerror=()=>{
-      this.newContactImage='https://via.placeholder.com/150'
-    };
-    img.src=this.newContactImage;
+    img.src = this.newContact.image;
   }
 }

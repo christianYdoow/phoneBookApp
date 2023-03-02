@@ -2,46 +2,32 @@
     <div class="row">
         <div class="col">
             <div class="h3 fw-bold text-danger">Add Contact</div>
-
         </div>
     </div>
-    <!-- <pre *ngFor="let contact of contacts">{{contact | json}}</pre> -->
     <div class="row">
         <div class="col-sm-4">
             <form action="">
                 <div class="mb-2">
-                    <input [(ngModel)]="newContactName" name="name" type="text" class="form-control" placeholder="Name" >
+                    <input [(ngModel)]="newContact.name" name="name" type="text" class="form-control" placeholder="Name">
                 </div>
                 <div class="mb-2">
-                    <input [(ngModel)]="newContactEmail" name="email"  type="email" class="form-control" placeholder="Email" >
+                    <input [(ngModel)]="newContact.email" name="email"  type="email" class="form-control" placeholder="Email">
                 </div>
                 <div class="mb-2">
-                    <input [(ngModel)]="newContactImage" name="image" type="text" class="form-control" placeholder="img" (ngModelChange)="updateImage()">
+                    <input [(ngModel)]="newContact.image" name="image" type="text" class="form-control" placeholder="img" (ngModelChange)="updateImage()">
                 </div>
                 <div class="mb-2">
-                    <input [(ngModel)]="newContactNumber" name="mobile" type="mobile" class="form-control" placeholder="Mobile" >
+                    <input [(ngModel)]="newContact.number" name="mobile" type="mobile" class="form-control" placeholder="Mobile">
                 </div>
                 <div class="mb-2">
-                    <input [(ngModel)]="newContactAddress"name="address" type="text" class="form-control" placeholder="Address" >
+                    <input [(ngModel)]="newContact.address" name="address" type="text" class="form-control" placeholder="Address">
                 </div>
                 <div class="mb-2">
-                    <input type="submit" class="btn btn-success" value="Create" (click)="addNewContact()" >
+                    <input type="submit" class="btn btn-success" value="Create" (click)="addNewContact()">
                     <a routerLink="/" class="btn btn-dark ms-2">Close</a>
                 </div>
             </form>
         </div>
-        <div class="col-sm-4" *ngFor="let contact of contacts">
-            <img [src]="newContactImage" alt="">
-            <div >
-                <div class="taskItem">
-                        <div class="mb-2">
-                            <div [type="text" class="form-control">{{contact.name}}
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
-
-
